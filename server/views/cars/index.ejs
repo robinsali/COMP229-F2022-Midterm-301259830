@@ -1,0 +1,88 @@
+<% include ../partials/header.ejs %>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <h3>Favourite Cars List</h3>
+      <!-- ------------------------ -->
+      <!-- FIX THE ADD BUTTON BELOW -->
+      <!-- ------------------------ -->
+     
+      <a href="/cars/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add a car</a>
+      <br />
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Car Name</th>
+              <th class="text-center">Car Model</th>
+              <th class="text-center">Category</th>
+              <th class="text-center">Price</th>
+              <th class="text-center"></th>
+               </tr>
+          </thead>
+          <tbody>
+            <!-- Template Row -->
+            <% for (let count = 0; count < cars.length; count++) { %>
+            <tr>
+              <td><%= cars[count].Carname %></td>
+
+              <td class="text-center"><%= cars[count].Category %></td>
+              <td class="text-center"><%= cars[count].Carmodel %></td>
+              <td class="text-center"><%= cars[count].Price %></td>
+
+              <td class="text-center">
+                <!-- ------------------------ -->
+                <!-- ADD the EDIT BUTTON HERE -->
+                <!-- ------------------------ -->
+                <a href="/cars/edit/<%= cars[count]._id %>" class="btn btn-primary btn-sm">
+                  <i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+              </td>
+
+              
+            </tr>
+            
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <!-- ------------------------ -->
+                <!--FIX the DELETE BUTTON HERE -->
+                <!-- ------------------------ -->
+      <form>
+        <div class="from-group">
+          <label for="nameTextField">Enter Car Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nameTextField"
+            placeholder="Enter Car Name:"
+            name="name"
+            required
+          />
+        </div>
+        <!-- <a href="cars/delete/1" class="btn btn-warning btn-sm"> -->
+          <a href="" id="deleteBtn" class="btn btn-warning btn-sm" onclick="deleteCars()" >
+            <i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+      </form>
+      <div class="col-md-offset-1 col-md-10 text-center">
+        <ul class="pagination pagination-lg pager" id="myPager"></ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+function deleteCars(){
+  if(document.getElementById('nameTextField').value == ""){
+    alert("Please provide Car name");
+    return false;
+  }
+  else{
+    document.getElementById("deleteBtn").href="cars/delete/"+document.getElementById('nameTextField').value; 
+  }
+}
+</script>
+
+<% include ../partials/footer.ejs %>
